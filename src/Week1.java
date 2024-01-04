@@ -1,5 +1,6 @@
 import java.util.*;
 @SuppressWarnings("unchecked")
+
 public class Week1 {
     public static void main(String[] args) throws Exception {
         ArrayList<String> collection1 = new ArrayList<>();
