@@ -6,5 +6,9 @@ public class Week1 {
         for (String s : cities) {
             System.out.print(s + " ");
         }
+        apple = "banana";
+        for (s: apple) {
+            print(s);
+        }
     }
 }
