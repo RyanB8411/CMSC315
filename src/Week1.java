@@ -13,5 +13,7 @@ public class Week1 {
             char curchar = banana.charAt(i);
             System.out.println(curchar + " ");
         }
+        //Streamline above code to fewer steps
+        banana.chars().forEach(letter -> System.out.println((char)letter));
     }
 }
