@@ -5,6 +5,20 @@
             "name": "Week1",
             "request": "launch",
             "mainClass": "Week1",
+            "projectName": "CMSC315_cc6ed9ee"
+        },
+        {
+            "type": "java",
+            "name": "Project1",
+            "request": "launch",
+            "mainClass": "Project1",
+            "projectName": "CMSC315_cc6ed9ee"
+        },
+        {
+            "type": "java",
+            "name": "Week1",
+            "request": "launch",
+            "mainClass": "Week1",
             "projectName": "CMSC315_5db50bfa"
         },
         {
