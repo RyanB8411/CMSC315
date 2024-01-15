@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Week1",
+            "request": "launch",
+            "mainClass": "Week1",
+            "projectName": "CMSC315_cc6ed9ee"
+        },
+        {
+            "type": "java",
+            "name": "Project1",
+            "request": "launch",
+            "mainClass": "Project1",
+            "projectName": "CMSC315_cc6ed9ee"
+        },
+        {
+            "type": "java",
+            "name": "Week1",
+            "request": "launch",
+            "mainClass": "Week1",
+            "projectName": "CMSC315_5db50bfa"
+        },
+        {
+            "type": "java",
+            "name": "Project1",
+            "request": "launch",
+            "mainClass": "Project1",
+            "projectName": "CMSC315_5db50bfa"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "MultipleBounceBall",
+            "projectName": "CMSC315_cc6ed9ee",
+            "vmArgs": "--module-path /Users/ryanburkhardt/Desktop/CMSC315/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
