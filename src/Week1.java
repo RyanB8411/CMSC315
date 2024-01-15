@@ -21,7 +21,7 @@ public class Week1 {
         String firstList = sc.nextLine();
 
         //Add our integers into our 1st queue using our private class below
-        addIntegersToQueue(firstList, queue1;
+        addIntegersToQueue(firstList, queue1);
 
         //repeat process for second list
         System.out.println("Please enter your second lines of integers seperated by a space:\t");
@@ -56,6 +56,7 @@ public class Week1 {
         sortQueue(intersection);
     }
 
+
     //Create a private class to take strings and import them to ints in our queue
     private static void addIntegersToQueue(String strings, PriorityQueue<Integer> queue) {
 
@@ -87,7 +88,8 @@ public class Week1 {
             
             //print each integer while queue is not empty
             System.out.print(sortedQueue.poll() + " ");
-        }
+        
 
+        }
     }
 }

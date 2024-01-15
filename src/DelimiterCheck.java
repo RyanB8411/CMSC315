@@ -17,6 +17,7 @@ public class DelimiterCheck {
     //State our variables for the reader, character stack line number and character number
     private BufferedReader reader;
     private Stack<Character> delimiterStack;
+    private Stack<Integer> delimiterLocation;
     private int lineNumber;
     private int charNumber;
 
@@ -28,6 +29,7 @@ public class DelimiterCheck {
 
         //Create a new stack for the delimiters
         delimiterStack = new Stack<>();
+        delimiterLocation = new Stack<>();
 
         //Index Line and Character Numbers
         lineNumber = 1;
@@ -69,11 +71,27 @@ public class DelimiterCheck {
                 skipLiteral(currentChar);
                 continue;
 
-            } 
+            //Tests individual code blocks to make sure they are complete without missing a '(' or '['
+            } else if (currentChar == ';' & !delimiterStack.empty()) {
+                if (delimiterStack.peek() == '{' ) {
+                    continue;
+                }else {
+                    currentChar = delimiterStack.pop();
+                    lineNumber = delimiterLocation.pop();
+                    charNumber = delimiterLocation.pop();
+                    System.out.println("Mismatched delimiter '" + currentChar + "' at " + getCurrentPosition());
+                    continue;
+                }
+            }
             //Returns our current character
             return currentChar;
         }
-
+        if(!delimiterStack.empty()){
+            char badChar = delimiterStack.pop();
+            lineNumber = delimiterLocation.pop();
+            charNumber = delimiterLocation.pop();
+            System.out.println("Mismatched delimiter '" + badChar + "' at " + getCurrentPosition());            
+        }
         //Will indicate the end of our file
         return '\0';
     }
@@ -147,38 +165,49 @@ public class DelimiterCheck {
         return peekNextCharacter() != -1;
     }
 
-    //Uses the built in character deliminator classifications to search for what type of delimiter it is
+    //character deliminator classifications to search for what type of delimiter it is and see if it is unmatched
     public boolean isDelimiterMismatch(char currentChar) {
 
-        //If left delimiter it will be pushed to stack
+        //If left delimiter it will be pushed to stack and location will be stored
         if (isLeftDelimiter(currentChar)) {
 
             delimiterStack.push(currentChar);
+
+            delimiterLocation.push(charNumber);
+            delimiterLocation.push(lineNumber);
 
         //If it is right delimiter it will see if the stack is empty or if it is a matching pair
         } else if (isRightDelimiter(currentChar)) {
             if (delimiterStack.isEmpty() || !isMatchingPair(delimiterStack.pop(), currentChar)) {
                 System.out.println("Mismatched delimiter '" + currentChar + "' at " + getCurrentPosition());
+                //If it is found to be a mistmatch we will set this to true and print the error message.
                 return true;
+            }else{
+                delimiterLocation.pop(); delimiterLocation.pop();
             }
         }
+        //Will set mistmatch to false and continue search
         return false;
     }
 
+    //Assign Left Delimiters
     private boolean isLeftDelimiter(char ch) {
         return ch == '(' || ch == '{' || ch == '[';
     }
 
+    //Assign right delimitres
     private boolean isRightDelimiter(char ch) {
         return ch == ')' || ch == '}' || ch == ']';
     }
 
+    //Assign matching delimiters
     private boolean isMatchingPair(char left, char right) {
         return (left == '(' && right == ')') ||
                (left == '{' && right == '}') ||
                (left == '[' && right == ']');
     }
 
+    //Close the reader
     public void close() throws IOException {
         reader.close();
     }
