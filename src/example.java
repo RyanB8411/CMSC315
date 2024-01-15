@@ -20,7 +20,7 @@ import javafx.util.Duration;
 public class example extends Application {
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
-    MultipleBallPane ballPane = new MultipleBallPane(;
+    MultipleBallPane ballPane = new MultipleBallPane();
     ballPane.setStyle("-fx-border-color: yellow");
 
     Button btAdd = new Button("+");
