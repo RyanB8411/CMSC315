@@ -54,6 +54,7 @@ public class Week1 {
         sortQueue(difference);
         System.out.print("\nThe intersection between the two priority queues is\n");
         sortQueue(intersection);
+        sc.close();
     }
 
 
@@ -75,6 +76,7 @@ public class Week1 {
                 sc.next();
             }
         }
+        sc.close();
     }
 
     //We will then need another Priavte class to sort using poll
