@@ -44,9 +44,9 @@ public class example extends Application {
     ballPane.rateProperty().bind(sbSpeed.valueProperty());
     
     BorderPane pane = new BorderPane();
-    pane.setCenter(ballPane);
-    pane.setTop(sbSpeed);
-    pane.setBottom(hBox);
+    pane.setCenterballPane);
+    pane.setTopsbSpeed);
+    pane.setBottomhBox);
 
     // Create a scene and place the pane in the stage
     Scene scene = new Scene(pane, 250, 150);
@@ -54,7 +54,6 @@ public class example extends Application {
     primaryStage.setScene(scene); // Place the scene in the stage
     primaryStage.show(); // Display the stage
   }
-
   private class MultipleBallPane extends Pane {
     private Timeline animation;
 

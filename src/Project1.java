@@ -89,6 +89,7 @@ public class Project1 {
                     }
                     //Displays question to user to see if they want to enter another file
                     System.out.println("Would you like to check another file? Please enter 'yes' or 'no':");
+                    validFileName = false;
                 }
     
                 //If user answers no system will thank them and exit loop
@@ -103,8 +104,5 @@ public class Project1 {
             }
 
         }
-
-        //Will close our scanner before exiting program
-        scanner.close();
     }
 }

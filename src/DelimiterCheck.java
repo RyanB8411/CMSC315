@@ -86,7 +86,7 @@ public class DelimiterCheck {
             //Returns our current character
             return currentChar;
         }
-        if(!delimiterStack.empty()){
+        if (!delimiterStack.empty()){
             char badChar = delimiterStack.pop();
             lineNumber = delimiterLocation.pop();
             charNumber = delimiterLocation.pop();
@@ -178,11 +178,12 @@ public class DelimiterCheck {
 
         //If it is right delimiter it will see if the stack is empty or if it is a matching pair
         } else if (isRightDelimiter(currentChar)) {
-            if (delimiterStack.isEmpty() || !isMatchingPair(delimiterStack.pop(), currentChar)) {
+            if (delimiterStack.isEmpty() || !isMatchingPair(delimiterStack.peek(), currentChar)) {
                 System.out.println("Mismatched delimiter '" + currentChar + "' at " + getCurrentPosition());
                 //If it is found to be a mistmatch we will set this to true and print the error message.
                 return true;
             }else{
+                delimiterStack.pop();
                 delimiterLocation.pop(); delimiterLocation.pop();
             }
         }
