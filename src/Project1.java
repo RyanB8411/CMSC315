@@ -42,7 +42,7 @@ public class Project1 {
                     System.out.println("Enter the Java file name (including path if necessary):");
                     String filePath = scanner.nextLine();
 
-                    //Try creating Delimiter Check object with the given file path if it is correct will be set true and exit while loop.
+                    //Try creating Delimiter Check object with the given file path if it is correct will be set true encapsulate the file and exit while loop.
                     try {
                         fileReader = new DelimiterCheck(filePath);
                         validFileName = true;
@@ -104,5 +104,6 @@ public class Project1 {
             }
 
         }
+        scanner.close();
     }
 }
