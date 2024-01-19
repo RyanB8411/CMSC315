@@ -20,8 +20,9 @@ public class DelimiterCheck {
     private Stack<Integer> delimiterLocation;
     private int lineNumber;
     private int charNumber;
+    private char badChar;
 
-    //Allow the Delimeter check to read in the file name or location indicated by fileName
+    //Allow the Delimeter check to read in the file name or location indicated by fileName also create the object
     public DelimiterCheck(String fileName) throws IOException {
 
         //The Reader will than create a new reader for the file inputted
@@ -34,6 +35,9 @@ public class DelimiterCheck {
         //Index Line and Character Numbers
         lineNumber = 1;
         charNumber = 0;
+
+        //Baseline badChar for a mismatch at end of file
+        badChar = 0;
     }
 
     //Create a character reader method that throws exceptions
@@ -87,7 +91,7 @@ public class DelimiterCheck {
             return currentChar;
         }
         if (!delimiterStack.empty()){
-            char badChar = delimiterStack.pop();
+            badChar = delimiterStack.pop();
             lineNumber = delimiterLocation.pop();
             charNumber = delimiterLocation.pop();
             System.out.println("Mismatched delimiter '" + badChar + "' at " + getCurrentPosition());            

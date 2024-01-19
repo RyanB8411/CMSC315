@@ -30,7 +30,7 @@ public class Project1 {
 
             //Allows user to stay in while loop
             String answer = scanner.nextLine();
-            System.out.println("DEBUG: User entered " + answer);
+            //System.out.println("DEBUG: User entered " + answer);
 
             //If answer is yes than we will read in the file of choice
             if (answer.equalsIgnoreCase("yes")){
