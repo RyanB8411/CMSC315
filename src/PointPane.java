@@ -57,6 +57,7 @@ public class PointPane extends Pane {
     }
 
     public static void main(String[] args) {
-        Application.launch(PointPane.class, args);
+        launch(args);
+      }
     }
-}
+    
