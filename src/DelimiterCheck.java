@@ -75,6 +75,7 @@ public class DelimiterCheck {
                 skipLiteral(currentChar);
                 continue;
 
+
             //Tests individual code blocks to make sure they are complete without missing a '(' or '['
             } else if (currentChar == ';' & !delimiterStack.empty()) {
                 if (delimiterStack.peek() == '{' ) {

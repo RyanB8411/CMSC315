@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Week3",
+            "request": "launch",
+            "mainClass": "Week3",
+            "projectName": "CMSC315_cc6ed9ee"
+        },
+        {
+            "type": "java",
             "name": "example",
             "request": "launch",
             "mainClass": "example",
