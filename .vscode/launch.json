@@ -5,7 +5,8 @@
             "name": "PointPane",
             "request": "launch",
             "mainClass": "PointPane",
-            "projectName": "CMSC315_cc6ed9ee"
+            "projectName": "CMSC315_cc6ed9ee",
+            "vmArgs": "--module-path /Users/ryanburkhardt/Desktop/CMSC315/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
