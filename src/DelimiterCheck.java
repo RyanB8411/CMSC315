@@ -1,8 +1,9 @@
 /**
  * UMGC CMSC 315
+ * Project 1
  * Class that will import a file and run it through a delimiter check
  * @author Ryan Burkhardt
- * Date: 13Jan2023
+ * Date: 20Jan2023
  * Java 21
 */
 

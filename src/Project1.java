@@ -1,8 +1,9 @@
 /**
  * UMGC CMSC 315
- * Class that displays union, intersection, and difference of two lines of integers
+ * Project 1
+ * Class that calls and encapsulates DelimiterCheck class to verify a vile has no missing delimiters
  * @author Ryan Burkhardt
- * Date: 07Jan2023
+ * Date: 20Jan2023
  * Java 21
 */
 
@@ -24,7 +25,7 @@ public class Project1 {
         boolean validAnswer = true;
 
         //Welcoming Message and ask for input
-        System.out.println("Hello, Welcome to the Delimiter Checker. Would you like to check a java file for missing delimiters? Please enter 'yes' or 'no':");
+        System.out.println("Hello, Welcome to the Delimiter Checker. Would you like to check a file for missing delimiters? Please enter 'yes' or 'no':");
 
         while(validAnswer){
 
@@ -39,7 +40,7 @@ public class Project1 {
                 while (!validFileName) {
 
                     //Prompt user for input and read in file
-                    System.out.println("Enter the Java file name (including path if necessary):");
+                    System.out.println("\nEnter the Java file name (including path if necessary):");
                     String filePath = scanner.nextLine();
 
                     //Try creating Delimiter Check object with the given file path if it is correct will be set true encapsulate the file and exit while loop.
@@ -49,7 +50,7 @@ public class Project1 {
 
                         //If there is an error it will catch stream errors and close()
                     } catch (IOException e) {
-                        System.err.println("Error opening the file: " + e.getMessage());
+                        System.err.println("\n***Error opening the file: " + e.getMessage());
                     }
                 }
 
@@ -72,11 +73,11 @@ public class Project1 {
                     }
 
                     //Indicates to the user that the check is complete
-                    System.out.println("Delimiter checking is complete for this file."); 
+                    System.out.println("\nDelimiter checking is complete for this file."); 
 
                     //Will catch a read in file exception
                 } catch (IOException e){
-                    System.err.println("Error reading the the file: " + e.getMessage());
+                    System.err.println("***\nError reading the the file: " + e.getMessage());
 
                     //Lastly will close the file reader
                 } finally {
@@ -84,23 +85,23 @@ public class Project1 {
                         try {
                             fileReader.close();
                         }catch (IOException e) {
-                            System.err.println("Error closing the file: " + e.getMessage());
+                            System.err.println("\n***Error closing the file: " + e.getMessage());
                         }
                     }
                     //Displays question to user to see if they want to enter another file
-                    System.out.println("Would you like to check another file? Please enter 'yes' or 'no':");
+                    System.out.println("\nWould you like to check another file? Please enter 'yes' or 'no':");
                     validFileName = false;
                 }
     
                 //If user answers no system will thank them and exit loop
             }else if (answer.equalsIgnoreCase("no")) {
-                System.out.println("Thank you for coming have a wonderful day.");
+                System.out.println("\nThank you for coming have a wonderful day.\n");
                 validAnswer = false;
 
                 //If user answers anything but yes or no will continue to repromt for valid answer
             }else{
                 validAnswer = true;
-                System.out.println("Please enter a valid input. Enter 'yes' or 'no' :");
+                System.out.println("\n***Please enter a valid input. Enter 'yes' or 'no' :");
             }
 
         }
