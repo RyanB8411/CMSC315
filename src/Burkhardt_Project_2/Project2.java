@@ -233,8 +233,6 @@ public class Project2 extends Application {
         }
     }
 
-    //Adding a test comment for github
-
     public static void main(String[] args) {
         launch(args);
     }
