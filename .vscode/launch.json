@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Project1",
+            "request": "launch",
+            "mainClass": "Burkhardt_Project_1.Project1",
+            "projectName": "CMSC315_5db50bfa"
+        },
+        {
+            "type": "java",
             "name": "Week3",
             "request": "launch",
             "mainClass": "Non_Projects.Week3",

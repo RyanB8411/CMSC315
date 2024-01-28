@@ -1,6 +1,6 @@
 package Burkhardt_Project_2;
 
-import java.util.*;
+import java.util.Comparator;
 
 public class Point implements Comparable<Point> {
     private double x;
