@@ -40,8 +40,7 @@ public class Project2 extends Application {
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
         // Read in file from point pane method
-        pointPane.readPointsFromFile(
-                "C:/Users/Ryan Burkhardt/iCloudDrive/Desktop/CMSC315/src/Burkhardt_Project_2/points.txt");
+        pointPane.readPointsFromFile("");
 
     }
 
