@@ -45,7 +45,7 @@ public class Project2 extends Application {
         primaryStage.show(); // Display the stage
         // Read in file from point pane method
         pointPane.readPointsFromFile(
-                "/Ryan Burkhardt/iCloudDrive/Desktop/CMSC315/src/Burkhardt_Project_2/points.txt");
+                "C:/Users/Ryan Burkhardt/iCloudDrive/Desktop/CMSC315/src/Burkhardt_Project_2/points.txt");
 
     }
 
