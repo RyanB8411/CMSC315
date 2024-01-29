@@ -1,5 +1,8 @@
 package Burkhardt_Project_2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  * UMGC CMSC 315
  * Project 2
@@ -14,8 +17,9 @@ package Burkhardt_Project_2;
 
 //Import Necessary Classes
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -41,7 +45,7 @@ public class Project2 extends Application {
         primaryStage.show(); // Display the stage
         // Read in file from point pane method
         pointPane.readPointsFromFile(
-                "C:/Users/Ryan Burkhardt/iCloudDrive/Desktop/CMSC315/src/Burkhardt_Project_2/points.txt");
+                "/Ryan Burkhardt/iCloudDrive/Desktop/CMSC315/src/Burkhardt_Project_2/points.txt");
 
     }
 
@@ -70,7 +74,7 @@ public class Project2 extends Application {
 
         // Returns true if point is below and to the left of second point
         public boolean isBelowToLeft(ThePoint point2) {
-            return y > point2.y && x > point2.x;
+            return y > point2.y && x < point2.x;
         }
 
         // compares two points x value
@@ -140,25 +144,25 @@ public class Project2 extends Application {
                 // Creates the boolean to see if it is a max value
                 boolean isMax = true;
 
-                // Creates a for loop to see if there is a point above and to the right
+                // Creates a for loop to see if there is a point below and to the left
                 for (ThePoint other : pointsList) {
 
                     // If there is a point then it will not be considered as a max value and set the
                     // boolean to false
-                    if (point.getY() > other.getY() && other.getX() >= point.getX()) {
+                    if (point.isBelowToLeft(other)) {
                         isMax = false;
                         break;
                     }
                 }
 
-                // Will add point to max if boolean is found to be true
+                // Will add point to max if there is no point above and to the right of it
                 if (isMax) {
                     maxList.add(point);
                 }
             }
 
-            // Sorts by the y vlaue to ensure the lowest value of x is to the left
-            maxList.sort(Comparator.comparingDouble(p -> p.y));
+            // Sorts by the x value to ensure the lowest value of x is to the left when drawing lines
+            Collections.sort(maxList, (p1, p2) -> Integer.compare(p1.compareTo(p2), 0));
 
         }
 
@@ -207,27 +211,27 @@ public class Project2 extends Application {
             }
         }
 
-        // Add a method to read points from a text file
+        // Add a method to read points from a file
         public void readPointsFromFile(String filePath) {
-            try {
-                // Reads all lines in our file
-                List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(filePath));
-                // Creates a for loop to read each line
-                for (String line : lines) {
-                    // Will use split to create our point assuming data is inputted properly
-                    String[] parts = line.split(" ");
-                    // When there are two numbers as strings it will create our point
-                    if (parts.length == 2) {
-                        double x = Double.parseDouble(parts[0]);// Assign X
-                        double y = Double.parseDouble(parts[1]);// Assign Y
-                        pointsList.add(new ThePoint(x, y));// Add to points List
-                        findMaxSet();// Finds Max Values
-                        drawPoints();// Draws the points
-                        drawLines();// Draws the lines
-                    }
+            //Creates scanner  object to read the text file
+            try (Scanner scanner = new Scanner(new File(filePath))) {
+
+                //creates a while loop to read in each double on every iteration it becomes an x or y value
+                while (scanner.hasNextDouble()) {
+                    double x = scanner.nextDouble();
+                    double y = scanner.nextDouble();
+
+                    //Adds our points to the list
+                    pointsList.add(new ThePoint(x, y));
+
+                    //finds max set and draws lines
+                    findMaxSet();
+                    drawPoints();
+                    drawLines();
                 }
-                // Will catch a read file exception and print out an error message
-            } catch (Exception e) {
+
+                //Catches file not found exception
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
