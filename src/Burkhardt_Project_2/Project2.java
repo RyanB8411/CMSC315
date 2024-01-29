@@ -40,7 +40,7 @@ public class Project2 extends Application {
         ThePane pointPane = new ThePane();// Create Pane
         // Create a scene and place the pane in the stage
         Scene scene = new Scene(pointPane);
-        primaryStage.setTitle("Project 2"); // Set the stage title
+        primaryStage.setTitle("Project 2 - Ryan Burkhardt"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
         // Read in file from point pane method
