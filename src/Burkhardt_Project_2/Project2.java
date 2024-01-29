@@ -224,7 +224,7 @@ public class Project2 extends Application {
                     //Adds our points to the list
                     pointsList.add(new ThePoint(x, y));
 
-                    //finds max set and draws lines
+                    //finds max set and draws points and lines
                     findMaxSet();
                     drawPoints();
                     drawLines();
