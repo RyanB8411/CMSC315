@@ -12,6 +12,8 @@ public class Project03 {
 //		String expression = "(55(32(41**)*)(51**))";
 		BinaryTree tree = parseExpression(expression);
 		displayTree(tree);
+		int treeHeight = getTreeHeight(tree);
+		System.out.println("\nThe height of the binary tree is " + treeHeight);
 	}
 
 	private static BinaryTree parseExpression(String expression) {
