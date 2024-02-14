@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Project03 {
 	// the main method is the entry point of the program
 	public static void main(String[] args) throws Exception {		// create a new Scanner object to read input from the console
-		Scanner in = new Scanner(System.in);
+		Scanner preOrder = new Scanner(System.in);
 		Boolean run = true;
 		while (run) {
 			System.out.print("Enter a binary tree: ");
 			// read a line of input from the console and store it in the expression variable
-			String expression = in.nextLine();
+			String expression = preOrder.nextLine();
 			//Testing String expression = "(53(28(11**)(41**))(83(67**)*))";
 			// create a new binary tree from the input expression
 			BinaryTree tree = parseExpression(expression);
@@ -25,7 +25,7 @@ public class Project03 {
 			isBalanced(tree);
 			while (run){
 				System.out.println("Do you want to continue? Y/N");
-				String userInput = in.nextLine();
+				String userInput = preOrder.nextLine();
 				if (userInput.equalsIgnoreCase("N")) {
 					run = false;
 					break;
