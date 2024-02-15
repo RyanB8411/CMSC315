@@ -15,7 +15,7 @@ public class Project3 {
             char prevChar = '\0'; // initialize previous character to null
             for (char c : input.toCharArray()) {
                 if (c == '(') {
-                    if (prevChar == '\0'){//If it is the start of the
+                    if (prevChar == '\0'){//If it is the start of the expression
                     }
                 else{
                     output.append("\n");
