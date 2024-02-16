@@ -9,20 +9,53 @@ public class Project03 {
 	public static void main(String[] args) throws Exception {		// create a new Scanner object to read input from the console
 		Scanner preOrder = new Scanner(System.in);
 		Boolean run = true;
+		ArrayList<Integer> orderedList = new ArrayList<Integer>();
+
 		while (run) {
 			System.out.print("Enter a binary tree: ");
 			// read a line of input from the console and store it in the expression variable
 			String expression = preOrder.nextLine();
 			//Testing String expression = "(53(28(11**)(41**))(83(67**)*))";
-			// create a new binary tree from the input expression
-			BinaryTree tree = parseExpression(expression);
-			// display the binary tree
-			displayTree(tree);
-			// calculate the height of the binary tree
-			int treeHeight = getTreeHeight(tree);
-			// print the height of the binary tree
-			System.out.println("\nThe height of the binary tree is " + treeHeight);
-			isBalanced(tree);
+			//Run Syntax check on expression
+			SyntaxCheck check = new SyntaxCheck(expression);
+			if (check.checkSyntax()){
+
+				// create a new binary tree from the input expression
+				BinaryTree tree = parseExpression(expression);
+				// display the binary tree
+				displayTree(tree);
+				// calculate the height of the binary tree
+				int treeHeight = getTreeHeight(tree);
+				
+				if((isBalanced(tree) & isBinarySearchTree(tree))){
+					System.out.println("It is a balanced binary search tree");
+				}
+				else if (isBinarySearchTree(tree) & !isBalanced(tree)){
+					System.out.println("It is a binary search tree but it is not balanced.");
+					
+					tree.addDataToList(orderedList);
+					// print the list to verify that it contains the correct data
+					//System.out.println("DEBUG: " + orderedList);
+					BinaryTree orderedTree = new BinaryTree(orderedList);
+					displayTree(orderedTree);
+					System.out.println("Original Tree has height " + treeHeight);
+					int newTreeHeight = getTreeHeight(orderedTree);
+					System.out.println("Balanced Tree has height " + newTreeHeight);
+				}
+				else if (!isBinarySearchTree(tree)){
+					System.out.println("It is not a Binary Search Tree.");
+					
+					tree.addDataToList(orderedList);
+					// print the list to verify that it contains the correct data
+					//System.out.println("DEBUG: " + orderedList);
+					BinaryTree orderedTree = new BinaryTree(orderedList);
+					displayTree(orderedTree);
+					System.out.println("Original Tree has height " + treeHeight);
+					int newTreeHeight = getTreeHeight(orderedTree);
+					System.out.println("Balanced Tree has height " + newTreeHeight);
+				}							
+			}
+			
 			while (run){
 				System.out.println("Do you want to continue? Y/N");
 				String userInput = preOrder.nextLine();
@@ -31,6 +64,7 @@ public class Project03 {
 					break;
 				}else if (userInput.equalsIgnoreCase("Y")) {
 					run = true;
+					orderedList.clear();
 					break;
 				}else {
 					continue;
@@ -38,7 +72,7 @@ public class Project03 {
 			}
 		}
 	}
-	
+
 	// parse an input expression and return a binary tree
 	private static BinaryTree parseExpression(String expression) {
 		int data = 0; // initialize a variable to store the data of the current node
@@ -98,12 +132,12 @@ public class Project03 {
 		return expression.substring(start, i + 1); // return the subexpression as a string
 	}
 	
-	// display the binary tree in a tree-like structure
+	// display the binary tree in indented structure
 	private static void displayTree(BinaryTree tree) {
 		displayTree(tree, 0); // call the recursive display method with the current tree and a level of 0
 	}
 
-	// recursive method to display the binary tree
+	// recursive method to display the binary tree in indented form
 	private static void displayTree(BinaryTree tree, int level) {
 		if (tree == null) { // if the current node is null, return
 			return;
@@ -136,19 +170,32 @@ public class Project03 {
 	
 		int leftHeight = getTreeHeight(tree.getLeft());
 		int rightHeight = getTreeHeight(tree.getRight());
+		int difference = Math.abs(leftHeight - rightHeight);
 	
-	
-		if (leftHeight == rightHeight) {
-			System.out.println("The tree is balanced");
+		if (difference <= 1) {
+			//System.out.println("Debug: is Balanced");
 			return true;
-		}else if (leftHeight > rightHeight){
-			System.out.println("Tree is inbalanced left branch is larger.");
-			return false;
 		}else{
-			System.out.println("Tree is inbalanced right branch is larger.");
+			//System.out.println( "Debug: Not Balanced");
 			return false;
 		}
 	}
+	public static boolean isBinarySearchTree(BinaryTree tree) {
+		return  isBinarySearchTree(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+	private static boolean isBinarySearchTree(BinaryTree tree, int min, int max) {
+		if (tree == null) {
+			//System.out.println("DEBUG: IsBinaryTee True");
+			return true;
+		}
+		if (tree.getData() < min || tree.getData() > max) {
+			//System.out.println("Is not a Binary Search Tree");
+			return false;
+		}
+		return isBinarySearchTree(tree.getLeft(), min, tree.getData() - 1)
+			&& isBinarySearchTree(tree.getRight(), tree.getData() + 1, max);
+	}
+
 
 }
 // class to represent a binary tree node
@@ -189,6 +236,19 @@ class BinaryTree {
 		}
 	}
 
+	public void addDataToList(ArrayList<Integer> list) {
+		// add the data of the current node to the list
+		list.add(data);
+	
+		// recursively add the data of the left and right children
+		if (left != null) {
+			left.addDataToList(list);
+		}
+		if (right != null) {
+			right.addDataToList(list);
+		}
+	}
+
 	// getter method to retrieve the data stored in the node
 	public int getData() {
 		return data;
@@ -202,5 +262,54 @@ class BinaryTree {
 	// getter method to retrieve the right child of the node
 	public BinaryTree getRight() {
 		return right;
+	}
+}
+class SyntaxCheck {
+	private int leftParenthesisCount = 0;
+	private int rightParenthesisCount = 0;
+	private int digitCount;
+	private String message = "";
+
+	public SyntaxCheck(String message){
+		this.message = message;
+	}
+	public Boolean checkSyntax(){
+		//In this line of code we will check to see if the expression starts
+		//with a ( contains a digit and * and ends with a )
+		if  (!message.matches("^\\(*\\d+\\*\\)*\\)$")){
+			for (int i = 0; i < message.length(); i++){
+				char c = message.charAt(i);
+				if (c == '('){
+					leftParenthesisCount += 1;
+				}
+				else if(c==')'){
+					rightParenthesisCount+=1;
+				}
+				else if (Character.isDigit(c)){
+					digitCount += 1;
+				}
+			}
+			if (message.charAt(message.length()-1) != ')'){
+				message = "Error: The expression does not end with a ).\n";
+			}
+			else if (leftParenthesisCount > rightParenthesisCount){
+				message = "Error: There are more opening than closing parentheses.\n";
+			}
+			else if (rightParenthesisCount > leftParenthesisCount) {
+				message = "Error: There are more closing than opening parentheses.\n";
+			}
+			else if (digitCount == 0){
+				message = "Error: The expression does not contain numbers.\n";
+			}
+			else{
+				return true;
+			}
+
+			System.out.println(message);
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 }
