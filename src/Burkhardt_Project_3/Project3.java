@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Project03 {
+public class Project3 {
 	// the main method is the entry point of the program
 	public static void main(String[] args) throws Exception {
 		//Initialize Variables
