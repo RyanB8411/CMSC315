@@ -3,7 +3,7 @@ package Burkhardt_Project_3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-public class Project3 {
+public class StringBuilder {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Boolean  run = true;
@@ -49,9 +49,6 @@ public class Project3 {
                     values.add(Integer.parseInt(s));
                 }
             }
-            BinaryTree tree = new BinaryTree(input);
-            System.out.println(tree.isBalanced());
-            System.out.println(tree);
             System.out.println(values);
             while (true) {
                 System.out.println("More Trees? Y or N");

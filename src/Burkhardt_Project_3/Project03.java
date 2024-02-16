@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Project03 {
 	// the main method is the entry point of the program
-	public static void main(String[] args) throws Exception {		// create a new Scanner object to read input from the console
+	public static void main(String[] args) throws Exception {
+		//Initialize Variables
 		Scanner preOrder = new Scanner(System.in);
 		Boolean run = true;
 		ArrayList<Integer> orderedList = new ArrayList<Integer>();
@@ -26,10 +27,13 @@ public class Project03 {
 				displayTree(tree);
 				// calculate the height of the binary tree
 				int treeHeight = getTreeHeight(tree);
-				
+				//After we check for our syntax we will run through our if statements
+				//if both isbalanced and is a binary search tree
 				if((isBalanced(tree) & isBinarySearchTree(tree))){
 					System.out.println("It is a balanced binary search tree");
 				}
+				//If it is binary search tree but is not balanced it will create an array list
+				//and add all the nodes to that BinaryTree then sort it using Collections.sort
 				else if (isBinarySearchTree(tree) & !isBalanced(tree)){
 					System.out.println("It is a binary search tree but it is not balanced.");
 					
@@ -42,6 +46,8 @@ public class Project03 {
 					int newTreeHeight = getTreeHeight(orderedTree);
 					System.out.println("Balanced Tree has height " + newTreeHeight);
 				}
+				//If it is not a binary search tree it will add all nodes to array list and 
+				//create a binary search tree
 				else if (!isBinarySearchTree(tree)){
 					System.out.println("It is not a Binary Search Tree.");
 					
@@ -56,6 +62,7 @@ public class Project03 {
 				}							
 			}
 			
+			//Prompt the user for next binary tree and catch improper input
 			while (run){
 				System.out.println("Do you want to continue? Y/N");
 				String userInput = preOrder.nextLine();
@@ -71,7 +78,7 @@ public class Project03 {
 					continue;
 				}
 			}
-		}
+		}preOrder.close();
 	}
 
 	// parse an input expression and return a binary tree
@@ -82,16 +89,16 @@ public class Project03 {
 		BinaryTree rightChild = null; // initialize a variable to store the right child of the current node
 		for (int i = 0; i < expression.length(); i++) { // iterate over each character in the expression
 			char ch = expression.charAt(i); // get the current character
-			if (ch == '(' || ch == '*') { // if the current character is an opening parenthesis or a multiplication operator
-				if (ch == '(') { // if the current character is an opening parenthesis
-					if (binaryTreeCount == 1) { // if this is the second binary tree in the expression
+			if (ch == '(' || ch == '*') { // if the current character is an opening parenthesis or an asterix we will enter are loop
+				if (ch == '(') { // if the current character is an opening parenthesis we will enter our next check to see the whole node
+					if (binaryTreeCount == 1) { // if this is the second binary tree in the expression send left branch of our tree
 						// extract the left subexpression from the input string
 						String leftExpression = extractExpression(expression, i);
 						// parse the left subexpression to create a binary tree
 						leftChild = parseExpression(leftExpression);
 						// update the index to the end of the left subexpression
 						i += leftExpression.length() - 1;
-					} else if (binaryTreeCount == 2) { // if this is the third binary tree in the expression
+					} else if (binaryTreeCount == 2) { // if this is the third binary tree in the expression we will send to the right branch
 						// extract the right subexpression from the input string
 						String rightExpression = extractExpression(expression, i);
 						// parse the right subexpression to create a binary tree
@@ -169,6 +176,7 @@ public class Project03 {
 	}
 	private static boolean isBalanced(BinaryTree tree){
 	
+		//Initialize Private Variables
 		int leftHeight = getTreeHeight(tree.getLeft());
 		int rightHeight = getTreeHeight(tree.getRight());
 		int difference = Math.abs(leftHeight - rightHeight);
@@ -182,6 +190,9 @@ public class Project03 {
 		}
 	}
 	public static boolean isBinarySearchTree(BinaryTree tree) {
+	// Check if the input tree is a binary search tree by recursively
+    // checking its left and right subtre against the minimum and
+    // maximum allowable values (Integer.MIN_VALUE and Integer.MAX_VALUE)
 		return  isBinarySearchTree(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 	private static boolean isBinarySearchTree(BinaryTree tree, int min, int max) {
@@ -266,11 +277,13 @@ class BinaryTree {
 	}
 }
 class SyntaxCheck {
+	//Initialize Private Variables
 	private int leftParenthesisCount = 0;
 	private int rightParenthesisCount = 0;
 	private int digitCount;
 	private String message = "";
 
+	//Create the Syntax Check Oobject
 	public SyntaxCheck(String message){
 		this.message = message;
 	}
@@ -278,6 +291,10 @@ class SyntaxCheck {
 		//In this line of code we will check to see if the expression starts
 		//with a ( contains a digit and * and ends with a )
 		if  (!message.matches("^\\(*\\d+\\*\\)*\\)$")){
+
+			//If it is found to be improperly we will run through a for loop to index
+			//parenthesis count to see if there are more ( then ) and vice versaa
+			//Also we will make sure the last character is a parenthesis and that it contains a digit
 			for (int i = 0; i < message.length(); i++){
 				char c = message.charAt(i);
 				if (c == '('){
@@ -306,9 +323,11 @@ class SyntaxCheck {
 				return true;
 			}
 
+			//Will return the error message we find
 			System.out.println(message);
 			return false;
 		}
+		//If no errors are found will return true
 		else{
 			return true;
 		}
