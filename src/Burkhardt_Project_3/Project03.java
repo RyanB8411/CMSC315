@@ -67,6 +67,7 @@ public class Project03 {
 					orderedList.clear();
 					break;
 				}else {
+					System.out.println("\n*****Invalid Input Please Try Again*****\n");
 					continue;
 				}
 			}
@@ -290,13 +291,13 @@ class SyntaxCheck {
 				}
 			}
 			if (message.charAt(message.length()-1) != ')'){
-				message = "Error: The expression does not end with a ).\n";
+				message = "\nError: The expression does not end with a ).\n";
 			}
 			else if (leftParenthesisCount > rightParenthesisCount){
-				message = "Error: There are more opening than closing parentheses.\n";
+				message = "\nError: There are more opening than closing parentheses.\n";
 			}
 			else if (rightParenthesisCount > leftParenthesisCount) {
-				message = "Error: There are more closing than opening parentheses.\n";
+				message = "\nError: There are more closing than opening parentheses.\n";
 			}
 			else if (digitCount == 0){
 				message = "Error: The expression does not contain numbers.\n";
