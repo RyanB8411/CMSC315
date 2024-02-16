@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "StrBuilder",
+            "request": "launch",
+            "mainClass": "Burkhardt_Project_3.StrBuilder",
+            "projectName": "CMSC315_5db50bfa"
+        },
+        {
+            "type": "java",
             "name": "Project03",
             "request": "launch",
             "mainClass": "Burkhardt_Project_3.Project03",

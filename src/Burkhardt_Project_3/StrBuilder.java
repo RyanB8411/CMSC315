@@ -3,7 +3,7 @@ package Burkhardt_Project_3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-public class StringBuilder {
+public class StrBuilder {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Boolean  run = true;
@@ -20,9 +20,9 @@ public class StringBuilder {
                 else{
                     output.append("\n");
                     for (int i=0; i< amountOfTabs; i++){
-                        output.append("\t");
-                }
+                        output.append("  ");
                     }
+                }
                     amountOfTabs++;
                 } else if (c == ')') {
                     if (prevChar != '*' || prevChar != ')') { // only add newline if previous character was not a ')'
@@ -32,7 +32,7 @@ public class StringBuilder {
 
                     amountOfTabs--;
                     for (int i=0; i< amountOfTabs; i++){
-                        output.append("\t");
+                        output.append("  ");
                     }
                 } else if (c == '*') {
                 } else if (c == ' ') {
