@@ -89,8 +89,8 @@ public class Project3 {
 		BinaryTree rightChild = null; // initialize a variable to store the right child of the current node
 		for (int i = 0; i < expression.length(); i++) { // iterate over each character in the expression
 			char ch = expression.charAt(i); // get the current character
-			if (ch == '(' || ch == '*' || ch == ' ') { // if the current character is an opening parenthesis or an asterix we will enter are loop
-				if (ch == '(' || ch == ' ') { // if the current character is an opening parenthesis we will enter our next check to see the whole node
+			if (ch == '(' || ch == '*') { // if the current character is an opening parenthesis or an asterix we will enter are loop
+				if (ch == '(') { // if the current character is an opening parenthesis we will enter our next check to see the whole node
 					if (binaryTreeCount == 1) { // if this is the second binary tree in the expression send left branch of our tree
 						// extract the left subexpression from the input string
 						String leftExpression = extractExpression(expression, i);
