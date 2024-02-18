@@ -1,3 +1,14 @@
+/**
+ * UMGC CMSC 315
+ * Project 3
+ * Class that will take the users input and create a Binary Search Tree
+ * It uses a parse expression to recursively extract the expression from the string
+ * After it has the three substrings it creates the  tree nodes with them.
+ * It uses classes Binary Search Tree as well SyntaxCheck Classes in its main methods.
+ * @author Ryan Burkhardt
+ * Date: 17Feb2024
+ * Java 21
+*/
 package Burkhardt_Project_3;
 
 import java.util.ArrayList;
@@ -213,6 +224,16 @@ public class Project3 {
 }
 // class to represent a binary tree node
 class BinaryTree {
+	/**
+	 * UMGC CMSC 315
+	 * Binary Tree
+	 * Class that will create a Binary Search Tree by recursively calling itself until it has 3 values
+	 * Another option for creating the Binary Tree is with an Array List recursively.
+	 * Lastly, it has the getters for the array list, data, left and right to call the value of the binary tree.
+	 * @author Ryan Burkhardt
+	 * Date: 17Feb2024
+	 * Java 21
+	*/
 	private int data; // the data stored in the node
 	private BinaryTree left; // the left child of the node
 	private BinaryTree right; // the right child of the node
@@ -278,6 +299,16 @@ class BinaryTree {
 	}
 }
 class SyntaxCheck {
+		/**
+	 * UMGC CMSC 315
+	 * SyntaxCheck
+	 * Class that will check the users input for errors and returns a printed string with
+	 * any found error. it uses the matches methods to make sure the expression is in proper formatting
+	 * see if the parenthesis are in the correct places and also return true if nothing is found.
+	 * @author Ryan Burkhardt
+	 * Date: 17Feb2024
+	 * Java 21
+	*/
 	//Initialize Private Variables
 	private int leftParenthesisCount = 0;
 	private int rightParenthesisCount = 0;
