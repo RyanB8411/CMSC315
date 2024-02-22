@@ -21,6 +21,10 @@ public final class Vertex {
         this.x = x;
         this.y = y;
     }
+    //toString method to print the Vertex
+    public String toString(){
+        return ("Vertex: "+ name +" at ("+ x +", "+ y + ")");
+    }
     //Getter for character name
     public Character getVertexName() {
         return name;
