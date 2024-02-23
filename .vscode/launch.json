@@ -9,6 +9,13 @@
             "name": "Project4Test",
             "request": "launch",
             "mainClass": "Burkhardt_Project_4.Project4Test",
+            "projectName": "CMSC315_dda183eb"
+        },
+        {
+            "type": "java",
+            "name": "Project4Test",
+            "request": "launch",
+            "mainClass": "Burkhardt_Project_4.Project4Test",
             "projectName": "CMSC315_5db50bfa"
         },
         {
