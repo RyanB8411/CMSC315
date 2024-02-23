@@ -1,3 +1,12 @@
+/**
+ * UMGC CMSC 315
+ * Project 4
+ * Class that will handle the creation and testing of project 4 data and methods no GUI
+ * @author Ryan Burkhardt
+ * Date: 23Feb2024
+ * Java 21
+*/
+
 package Burkhardt_Project_4;
 
 import java.util.*;
