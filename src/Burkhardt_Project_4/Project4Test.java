@@ -24,7 +24,7 @@ public class Project4Test{
         
 
         testGraph.addEdge(vert1, vert2);
-        testGraph.addEdge(vert2, vert3);
+        testGraph.addEdge(vert2, vert1);
         testGraph.addEdge(vert3, vert4);
         testGraph.addEdge(vert4, vert5);
         testGraph.addEdge(vert5, vert6);
@@ -117,30 +117,20 @@ class Graph {
         return false;
     }
 
-    Boolean isConnectedRecursive(Vertex v1) {//to me this is making sense but it is not working.
-        ArrayList<Vertex> connected = getConnectedVertices(v1);
-        for (Vertex con : connected) {
-            if (!visitedVert.contains(con)) {//If the list doesnt contain the vertex we are visiting
-                visitedVert.add(con);//it will add it
-                System.out.println(visitedVert.size()+" "+ vertices.size());
-            if (visitedVert.size() == vertices.size()) { // Check if all vertices have been visitedif on the last recursion end
-                return true;
-            }
-            isConnectedRecursive(con);
-            }
-        }
-        return false;
-    }
     ArrayList<Vertex> visitedVert;
-    //method that checks if the graph is connected
-    Boolean isConnected() {
-        for (Vertex vertex : vertices.values()) {
-            visitedVert = new ArrayList<>(); // Clear visitedVert for each vertex
-            if (!isConnectedRecursive(vertex)) {
-                return false;
+    Boolean isConnected(){
+        visitedVert = new ArrayList<>();
+        Vertex startPoint = vertices.get('A');
+        visitedVert.add(startPoint);
+        for (int i = 0; i < visitedVert.size(); i++){
+            for(Vertex vertex : getConnectedVertices(visitedVert.get(i))){
+                if (!visitedVert.contains(vertex)){
+                    visitedVert.add(vertex);
+                }
             }
+
         }
-        return true;
+        return visitedVert.size() == vertices.size();
     }
 
     // method returns a list of vertices resulting from a depth-first graph search
@@ -218,3 +208,37 @@ final class Vertex {
         return y;
     }
 }
+
+
+// ####################FAILED METHODS##########################//
+    // private Boolean isConnected(Vertex v1) {//to me this is making sense but it is not working.
+    //     ArrayList<Vertex> connected = getConnectedVertices(v1);
+    //     for (Vertex con : connected) {
+    //         if (!visitedVert.contains(con)) {//If the list doesnt contain the vertex we are visiting
+    //             visitedVert.add(con);//it will add it
+    //             System.out.println("Each Pass" + visitedVert.size()+" "+ vertices.size());
+    //         if (visitedVert.size() == vertices.size()) { // Check if all vertices have been visitedif on the last recursion end
+    //             return true;
+    //         }
+    //         isConnected(con);
+    //     }
+    //     }
+    //     return false;
+    // }
+    
+    //method that checks if the graph is connected
+    // Boolean isConnected() {
+    //     visitedVert = new ArrayList<>(); // Clear visitedVert for each vertex
+    //     System.out.println(visitedVert.size()+" "+ vertices.size());
+    //     for (Vertex vertex : vertices.values()) {
+    //         System.out.println(isConnectedRecursive(vertex));
+    //         if (!isConnectedRecursive(vertex)) {
+    //             System.out.println("False" + visitedVert.size()+" "+ vertices.size());
+
+    //             return false;
+    //         }
+    //     }
+    //     System.out.println("True" + visitedVert.size()+" "+ vertices.size());
+
+    //     return true;
+    // }
