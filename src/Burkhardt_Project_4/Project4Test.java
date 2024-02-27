@@ -90,8 +90,7 @@ class Graph {
         ArrayList<Edge> connections = getConnectedEdges(vertex);
         for (Edge con : connections) {
             if (!visited.contains(con)) {
-                System.out.println(
-                        vertex.getYCoordinate() + "->" + con.v1.getYCoordinate() + "," + con.v2.getYCoordinate());
+                System.out.println(vertex.getVertexName());
                 visited.add(con);
                 if (con.v1 == original || con.v2 == original)
                     return true;
@@ -118,15 +117,16 @@ class Graph {
         return false;
     }
 
-    Boolean isConnectedRecursive(Vertex v1) {
+    Boolean isConnectedRecursive(Vertex v1) {//to me this is making sense but it is not working.
         ArrayList<Vertex> connected = getConnectedVertices(v1);
         for (Vertex con : connected) {
-            if (!visitedVert.contains(con)) {
-                visitedVert.add(con);
-                if (visitedVert.size() == vertices.size()) { // Check if all vertices have been visited
-                    return true;
-                }
-                isConnectedRecursive(con);
+            if (!visitedVert.contains(con)) {//If the list doesnt contain the vertex we are visiting
+                visitedVert.add(con);//it will add it
+                System.out.println(visitedVert.size()+" "+ vertices.size());
+            if (visitedVert.size() == vertices.size()) { // Check if all vertices have been visitedif on the last recursion end
+                return true;
+            }
+            isConnectedRecursive(con);
             }
         }
         return false;
@@ -145,12 +145,13 @@ class Graph {
 
     // method returns a list of vertices resulting from a depth-first graph search
     public void depthFirstSearch() {
-        // TODO implement DFS
+
+        // Here I need to implement maybe a stack for the depth first search.
     }
 
     // method returns a list of vertices resulting from a breadth-first search
     public void breadthFirstSearch() {
-        // TODO implement BFS
+        // Here I believe i use a queue for the breadth first search.
     }
 
     public String printAllVerts(){
