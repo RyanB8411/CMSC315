@@ -3,16 +3,13 @@ package Burkhardt_Project_4;
 import java.util.ArrayList;
 import java.util.List;
 
-import Burkhardt_Project_2.Project2.ThePoint;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -30,18 +27,6 @@ public class P4Pane extends Pane {
         setPrefSize(500, 500);
         Graph graph = new Graph();
 
-        // Set the mouse clicks to add a new vertex
-        setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                if(event.getY() > 60 && event.getY() < 415){
-                    Vertex vertex = graph.addVertex(event.getX(), event.getY());
-                    vertexList.add(vertex);
-                    drawVertex(vertex);
-                    System.out.println(vertex.toString());
-                }
-            }
-        });
-
         // Create Buttons and TextFields we wil be using
         Button addEdgeButton = new Button("Add Edge");
         Label vertex1Label = new Label("Vertex 1:");
@@ -56,6 +41,7 @@ public class P4Pane extends Pane {
         Button bfsButton = new Button("Breadth First Search");
         TextField messageDisplay = new TextField();
         messageDisplay.setPrefSize(423, 20);
+        messageDisplay.setEditable(false);
 
         // Create a HBox to hold the button and labels
         HBox topBox = new HBox(5);
@@ -75,11 +61,29 @@ public class P4Pane extends Pane {
         // Add the HBox to the Pane
         getChildren().addAll(topBox, lowerBox1, lowerBox2);
 
+        // Set the mouse clicks to add a new vertex
+        setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                if(event.getY() > 60 && event.getY() < 415){
+                    if (vertexList.size() < 26){
+                        Vertex vertex = graph.addVertex(event.getX(), event.getY());
+                        vertexList.add(vertex);
+                        drawVertex(vertex);
+                        messageDisplay.setText("Successfully added: " + vertex.toString());
+                        messageDisplay.setStyle("-fx-text-inner-color: green");
+                    }else{
+                        messageDisplay.setText("Only up to 26 vertices can be added.");
+                        messageDisplay.setStyle("-fx-text-inner-color: red");
+                    }
+                }
+            }
+        });
+
         // Add action listener to the 'Add Edge' button
         addEdgeButton.setOnAction(event -> {
             if (!vertex1TextField.getText().isEmpty() && !vertex2TextField.getText().isEmpty()) {
-                Vertex vertex1 = graph.getVertex(vertex1TextField.getText().charAt(0));
-                Vertex vertex2 = graph.getVertex(vertex2TextField.getText().charAt(0));
+                Vertex vertex1 = graph.getVertex(vertex1TextField.getText().toUpperCase().charAt(0));
+                Vertex vertex2 = graph.getVertex(vertex2TextField.getText().toUpperCase().charAt(0));
                 if (vertexList.contains(vertex1) && vertexList.contains(vertex2)) {
                     graph.addEdge(vertex1, vertex2);
                     Edge edge = graph.addEdge(vertex1, vertex2);
@@ -114,6 +118,11 @@ public class P4Pane extends Pane {
         dfsButton.setOnAction(event -> {
             if (!EdgeList.isEmpty()){
                 messageDisplay.setText(graph.depthFirstSearch());
+            }
+        });
+        bfsButton.setOnAction(event -> {
+            if (!EdgeList.isEmpty()){
+                messageDisplay.setText(graph.breadthFirstSearch());
             }
         });
     }

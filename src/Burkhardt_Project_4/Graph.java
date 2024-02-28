@@ -1,5 +1,12 @@
 package Burkhardt_Project_4;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.Stack;
 
 public class Graph {
 
@@ -113,7 +120,7 @@ public class Graph {
     
         dfsStack.push(vertices.get('A')); // Starting from vertex 'A'
         visited.add(vertices.get('A'));
-        dfsString += "Viseted: ";
+        dfsString += "Visited: ";
     
         while (!dfsStack.isEmpty()) {
             Vertex currentVertex = dfsStack.pop();
@@ -131,16 +138,18 @@ public class Graph {
     }
 
     // method returns a list of vertices resulting from a breadth-first search
-    public void breadthFirstSearch() {
+    public String breadthFirstSearch() {
         Queue<Vertex> bfsQueue = new LinkedList<>();
         Set<Vertex> visited = new HashSet<>();
+        String bfsString = "";
     
         bfsQueue.offer(vertices.get('A')); // Starting from vertex 'A'
         visited.add(vertices.get('A'));
+        bfsString += "Visited: ";
     
         while (!bfsQueue.isEmpty()) {
             Vertex currentVertex = bfsQueue.poll();
-            System.out.println("Visited: " + currentVertex.getVertexName());
+            bfsString += currentVertex.getVertexName()+ " ";
     
             // Get connected vertices and add them to the queue if not visited
             for (Vertex neighbor : getConnectedVertices(currentVertex)) {
@@ -150,6 +159,7 @@ public class Graph {
                 }
             }
         }
+        return bfsString;
     }
 
     public String printAllVerts(){
