@@ -4,6 +4,7 @@
  * 22Feb2024
  * This class includes the constructor for a vertex as well as the three getter methods
  * to return the name or character such as a, b, c etc. and the coordinates for x and y.
+ * lastly it utilizes the toString() method to display the vertex to the user
  * Java 21
  */
 

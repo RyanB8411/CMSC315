@@ -28,7 +28,7 @@ public class Graph {
         vertIndex += 1;
         return v;
     }
-
+    //method to get a vertex by its name
     public Vertex getVertex(char c) {
         for (Map.Entry<Character, Vertex> entry : vertices.entrySet()) {
             if (entry.getKey().equals(c)) {
@@ -40,7 +40,8 @@ public class Graph {
 
     // method to add an edge
     public Edge addEdge(Vertex vert1, Vertex vert2) {
-        Edge e = edges.put(edgeIndex, new Edge(vert1, vert2));
+        Edge e = new Edge(edgeIndex, vert1, vert2);
+        edges.put(edgeIndex, e);
         edgeIndex += 1;
         return e;
     }
@@ -161,27 +162,14 @@ public class Graph {
         }
         return bfsString;
     }
-
-    public String printAllVerts(){
-        String str = "";
-        for (int i=0; i < vertices.size(); i++){
-            str += vertices.get(names[i]).toString() + "\n";
-        }
-        return str;
-    }
-    public String printAllEdges(){
-        String str = "";
-        for (int i=0; i < edges.size(); i++){
-            str += edges.get(i).toString() + "\n";
-        }
-        return str;
-    }
 }
 class Edge {
+    Integer index;
     Vertex v1;
     Vertex v2;
 
-    Edge(Vertex v1, Vertex v2) {
+    Edge(Integer index, Vertex v1, Vertex v2) {
+        this.index = index;
         this.v1 = v1;
         this.v2 = v2;
     }
@@ -195,6 +183,6 @@ class Edge {
     }
 
     public String toString() {
-        return ("Edge is from " + v1 + " to " + v2);
+        return (v1.getVertexName() + " to " + v2.getVertexName());
     }
 }
