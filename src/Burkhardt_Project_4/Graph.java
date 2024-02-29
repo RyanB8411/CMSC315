@@ -1,3 +1,17 @@
+/**
+ * UMGC CMSC 315
+ * Project 4
+ * Class that will house all methods for the graph and create the graph
+ * that will be called by the pane to dislay. This includes the blank graph
+ * object as well as all methods needed to accurately keep the graph. such as 
+ * isconnected, checkCycle, depth first and breadth first Search. Lastly is 
+ * the class edge goused at the bottom of this class to define an edge class
+ * and object to use in our graph to connect our vertices.
+ * @author Ryan Burkhardt
+ * Date: 26Feb2024
+ * Java 21
+*/
+
 package Burkhardt_Project_4;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +24,7 @@ import java.util.Stack;
 
 public class Graph {
 
+    // initialize all needed variables
     private Map<Character, Vertex> vertices = new HashMap<>();
     private Map<Integer, Edge> edges = new HashMap<>();
     private char[] names = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -28,7 +43,7 @@ public class Graph {
         vertIndex += 1;
         return v;
     }
-    //method to get a vertex by its name
+    // method to get a vertex by its name
     public Vertex getVertex(char c) {
         for (Map.Entry<Character, Vertex> entry : vertices.entrySet()) {
             if (entry.getKey().equals(c)) {
@@ -45,8 +60,8 @@ public class Graph {
         edgeIndex += 1;
         return e;
     }
-
-    ArrayList<Edge> getConnectedEdges(Vertex vertex) {
+    // method to check whether two edges are connected
+    public ArrayList<Edge> getConnectedEdges(Vertex vertex) {
         ArrayList<Edge> result = new ArrayList<>();
         for (Map.Entry<Integer, Edge> edge : edges.entrySet()) {
             if (edge.getValue().v1 == vertex || edge.getValue().v2 == vertex)
@@ -54,8 +69,8 @@ public class Graph {
         }
         return result;
     }
-
-    ArrayList<Vertex> getConnectedVertices(Vertex vertex) {
+    // method to check if all vertices are connected
+    public ArrayList<Vertex> getConnectedVertices(Vertex vertex) {
         ArrayList<Vertex> result = new ArrayList<>();
         for (Map.Entry<Integer, Edge> edge : edges.entrySet()) {
             if (edge.getValue().v1 == vertex)
@@ -70,7 +85,7 @@ public class Graph {
         ArrayList<Edge> connections = getConnectedEdges(vertex);
         for (Edge con : connections) {
             if (!visited.contains(con)) {
-                System.out.println(vertex.getVertexName());
+                //Used for Debugging System.out.println(vertex.getVertexName());
                 visited.add(con);
                 if (con.v1 == original || con.v2 == original)
                     return true;
@@ -84,8 +99,9 @@ public class Graph {
         return false;
     }
 
-    // method that checks whether the graph has cycles
-    ArrayList<Edge> visited;
+    // method that checks whether the graph has cycles I chose to put the
+    // visited arrays above each method to avoid my own confusion
+    ArrayList<Edge> visited;//initialize the Array list to store viited vertices in cycle check
 
     public boolean checkCycle() {
         for (Map.Entry<Integer, Edge> edge : edges.entrySet()) {
@@ -97,7 +113,7 @@ public class Graph {
         return false;
     }
 
-    ArrayList<Vertex> visitedVert;
+    ArrayList<Vertex> visitedVert;//arraylist for visited vertices in isConnected
     public Boolean isConnected(){
         visitedVert = new ArrayList<>();
         Vertex startPoint = vertices.get('A');
@@ -163,17 +179,18 @@ public class Graph {
         return bfsString;
     }
 }
+// Creates an Edge class which we will use to connect the vertices in our graph
 class Edge {
     Integer index;
     Vertex v1;
     Vertex v2;
-
+    // create our edge object with an index and two connecting vertices
     Edge(Integer index, Vertex v1, Vertex v2) {
         this.index = index;
         this.v1 = v1;
         this.v2 = v2;
     }
-
+    // generate the getters for vertices
     public Vertex getEdgeStart(){
         return v1;
     }
@@ -181,7 +198,7 @@ class Edge {
     public Vertex getEdgeEnd(){
         return v2;
     }
-
+    //create the toString to display in the javaFX application
     public String toString() {
         return (v1.getVertexName() + " to " + v2.getVertexName());
     }

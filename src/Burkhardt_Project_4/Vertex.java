@@ -24,7 +24,8 @@
      }
      //toString method to print the Vertex
      public String toString(){
-         return ("Vertex: "+ name +" at ("+ x +", "+ y + ")");
+        return String.format("Vertex: %c at (%1.0f, %1.0f)", name, x, y);
+    
      }
      //Getter for character name
      public Character getVertexName() {

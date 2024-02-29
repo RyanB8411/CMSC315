@@ -33,7 +33,7 @@ public class P4Pane extends Pane {
 
     // Initialize our two Lists to store vertices and edges
     private List<Vertex> vertexList = new ArrayList<>();
-    private List<Edge> EdgeList = new ArrayList<>();
+    private List<Edge> edgeList = new ArrayList<>();
 
     // Create the Pane object
     public P4Pane() {
@@ -107,7 +107,7 @@ public class P4Pane extends Pane {
                 if (vertexList.contains(vertex1) && vertexList.contains(vertex2)) {
                     graph.addEdge(vertex1, vertex2);
                     Edge edge = graph.addEdge(vertex1, vertex2);
-                    EdgeList.add(edge);
+                    edgeList.add(edge);
                     messageDisplay.setText("Edge created from " + edge.toString() + " successfully!");
                     messageDisplay.setStyle("-fx-text-inner-color: green;");
                     drawEdges(vertex1, vertex2);
@@ -115,44 +115,80 @@ public class P4Pane extends Pane {
                     messageDisplay.setText("One or both of the vertices are not in the vertex list.");
                     messageDisplay.setStyle("-fx-text-inner-color: red;");
                 }
+            }else {
+                messageDisplay.setText("One or both of the vertices were left blank.");
+                messageDisplay.setStyle("-fx-text-inner-color: red;");
             }
         });
 
         // Button to check if the graph is connected and display message to user
         isConnectedButton.setOnAction(event -> {
-            if (graph.isConnected()){
-                messageDisplay.setText("The graph is Connected");
-                messageDisplay.setStyle("-fx-text-inner-color: green;");
+            if(!vertexList.isEmpty()){
+                if(!edgeList.isEmpty()){
+                    if (graph.isConnected()){
+                        messageDisplay.setText("The graph is Connected");
+                        messageDisplay.setStyle("-fx-text-inner-color: green;");
+                    }
+                    else{
+                        messageDisplay.setText("The graph is not Connected.");
+                        messageDisplay.setStyle("-fx-text-inner-color: red;");
+                    }
+                }
+                else{
+                    messageDisplay.setText("The graph contains no edges.");
+                    messageDisplay.setStyle("-fx-text-inner-color: red;");
+                }
             }
             else{
-                messageDisplay.setText("The Graph is not Connected.");
+                messageDisplay.setText("The graph is empty.");
                 messageDisplay.setStyle("-fx-text-inner-color: red;");
             }
         });
 
         //Button to check if the graph contains cycles and display message to user
         hasCyclesButton.setOnAction(event -> {
-            if (graph.checkCycle()){
-                messageDisplay.setText("The graph contains a cycle");
-                messageDisplay.setStyle("-fx-text-inner-color: green;");
-            }
-            else{
-                messageDisplay.setText("The graph doesn't have cycles");
+            if(!vertexList.isEmpty()){
+                if(!edgeList.isEmpty()){
+                    if (graph.checkCycle()){
+                        messageDisplay.setText("The graph contains a cycle");
+                        messageDisplay.setStyle("-fx-text-inner-color: green;");
+                    }else{
+                        messageDisplay.setText("The graph doesn't have cycles");
+                        messageDisplay.setStyle("-fx-text-inner-color: red;");
+                    }
+                }else{
+                    messageDisplay.setText("The graph contains no edges.");
+                    messageDisplay.setStyle("-fx-text-inner-color: red;");
+                }
+            }else{
+                messageDisplay.setText("The graph is empty.");
                 messageDisplay.setStyle("-fx-text-inner-color: red;");
             }
         });
 
         //Button to display the dfs in the message window
         dfsButton.setOnAction(event -> {
-            if (!EdgeList.isEmpty()){
+            if (vertexList.isEmpty()) {
+                messageDisplay.setText("The graph is empty.");
+                messageDisplay.setStyle("-fx-text-inner-color: red;");
+            }else if (!edgeList.isEmpty()){
                 messageDisplay.setText(graph.depthFirstSearch());
+            }else{
+                messageDisplay.setText("The graph contains no edges.");
+                messageDisplay.setStyle("-fx-text-inner-color: red;");
             }
         });
 
         //Button to display the bfs in the message window
         bfsButton.setOnAction(event -> {
-            if (!EdgeList.isEmpty()){
+            if (vertexList.isEmpty()) {
+                messageDisplay.setText("The graph is empty.");
+                messageDisplay.setStyle("-fx-text-inner-color: red;");
+            }else if (!edgeList.isEmpty()){
                 messageDisplay.setText(graph.breadthFirstSearch());
+            }else{
+                messageDisplay.setText("The graph contains no edges.");
+                messageDisplay.setStyle("-fx-text-inner-color: red;");
             }
         });
     }
@@ -171,7 +207,7 @@ public class P4Pane extends Pane {
 
     //Will draw the Edges on the JavaFX graph
     private void drawEdges(Vertex v1, Vertex v2) {
-        if (!EdgeList.isEmpty()) {
+        if (!edgeList.isEmpty()) {
             Line edgeLine = new Line(v1.getXCoordinate(), v1.getYCoordinate(), v2.getXCoordinate(), v2.getYCoordinate());
             edgeLine.setStroke(Color.BLACK);
             edgeLine.setStrokeWidth(2);
