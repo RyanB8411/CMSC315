@@ -9,6 +9,13 @@
             "name": "Project4",
             "request": "launch",
             "mainClass": "Burkhardt_Project_4.Project4",
+            "projectName": "CMSC315_dda183eb"
+        },
+        {
+            "type": "java",
+            "name": "Project4JavaFXPC",
+            "request": "launch",
+            "mainClass": "Burkhardt_Project_4.Project4",
             "projectName": "CMSC315_9adbe96",
             "vmArgs": "--module-path C:/Java/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml"
         },

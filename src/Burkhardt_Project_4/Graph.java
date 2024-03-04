@@ -25,10 +25,9 @@ import java.util.Stack;
 public class Graph {
 
     // initialize all needed variables
-    private Map<Character, Vertex> vertices = new HashMap<>();
+    private Map<String, Vertex> vertices = new HashMap<>();
     private Map<Integer, Edge> edges = new HashMap<>();
-    private char[] names = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+    private final String[] names = new String[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private int vertIndex = 0;
     private int edgeIndex = 0;
 
@@ -38,15 +37,27 @@ public class Graph {
 
     // method to add a vertex
     public Vertex addVertex(Double x, Double y) {
-        Vertex v = new Vertex(names[vertIndex], x, y);
-        vertices.put(names[vertIndex], v);
+        String name = "";
+        if (vertIndex > 25) {
+            // If the vertex index is divisible by 26, create a new letter combination
+            int quotient = vertIndex / 26;
+            int remainder = vertIndex % 26;
+            for (int i = 0; i < quotient; i++){
+                name += names[0];
+            }; // Get the previous letter (e.g. for 53, it will be A)
+            name += names[remainder]; // Get the current letter (e.g. for 53, it will be A)
+        } else {
+            name = names[vertIndex]; // Get the current letter
+        }
+        Vertex v = new Vertex(name, x, y);
+        vertices.put(name, v);
         vertIndex += 1;
         return v;
     }
     // method to get a vertex by its name
-    public Vertex getVertex(char c) {
-        for (Map.Entry<Character, Vertex> entry : vertices.entrySet()) {
-            if (entry.getKey().equals(c)) {
+    public Vertex getVertex(String name) {
+        for (Map.Entry<String, Vertex> entry : vertices.entrySet()) {
+            if (entry.getKey().equals(name)) {
                 return entry.getValue();
             }
         }
@@ -116,7 +127,7 @@ public class Graph {
     ArrayList<Vertex> visitedVert;//arraylist for visited vertices in isConnected
     public Boolean isConnected(){
         visitedVert = new ArrayList<>();
-        Vertex startPoint = vertices.get('A');
+        Vertex startPoint = vertices.get("A");
         visitedVert.add(startPoint);
         for (int i = 0; i < visitedVert.size(); i++){
             for(Vertex vertex : getConnectedVertices(visitedVert.get(i))){
@@ -135,8 +146,8 @@ public class Graph {
         Set<Vertex> visited = new HashSet<>();
         String dfsString = "";
     
-        dfsStack.push(vertices.get('A')); // Starting from vertex 'A'
-        visited.add(vertices.get('A'));
+        dfsStack.push(vertices.get("A")); // Starting from vertex 'A'
+        visited.add(vertices.get("A"));
         dfsString += "Visited: ";
     
         while (!dfsStack.isEmpty()) {
@@ -160,8 +171,8 @@ public class Graph {
         Set<Vertex> visited = new HashSet<>();
         String bfsString = "";
     
-        bfsQueue.offer(vertices.get('A')); // Starting from vertex 'A'
-        visited.add(vertices.get('A'));
+        bfsQueue.offer(vertices.get("A")); // Starting from vertex 'A'
+        visited.add(vertices.get("A"));
         bfsString += "Visited: ";
     
         while (!bfsQueue.isEmpty()) {

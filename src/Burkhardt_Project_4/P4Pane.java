@@ -84,16 +84,16 @@ public class P4Pane extends Pane {
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 if(event.getY() > 60 && event.getY() < 415){//make the upper and lower portions of the screen unclickable
-                    if (vertexList.size() < 26){//Only allow A-Z
-                        Vertex vertex = graph.addVertex(event.getX(), event.getY());
-                        vertexList.add(vertex);
-                        drawVertex(vertex);
-                        messageDisplay.setText("Successfully added: " + vertex.toString());
-                        messageDisplay.setStyle("-fx-text-inner-color: green");
-                    }else{
-                        messageDisplay.setText("Only up to 26 vertices can be added.");
-                        messageDisplay.setStyle("-fx-text-inner-color: red");
-                    }
+                    //if (vertexList.size() < 26){//Only allow A-Z
+                    Vertex vertex = graph.addVertex(event.getX(), event.getY());
+                    vertexList.add(vertex);
+                    drawVertex(vertex);
+                    messageDisplay.setText("Successfully added: " + vertex.toString());
+                    messageDisplay.setStyle("-fx-text-inner-color: green");
+                    // }else{
+                    //     messageDisplay.setText("Only up to 26 vertices can be added.");
+                    //     messageDisplay.setStyle("-fx-text-inner-color: red");
+                    // }
                 }
             }
         });
@@ -102,8 +102,8 @@ public class P4Pane extends Pane {
         // see if the user has entered valid input and textFields aren't empty
         addEdgeButton.setOnAction(event -> {
             if (!vertex1TextField.getText().isEmpty() && !vertex2TextField.getText().isEmpty()) {
-                Vertex vertex1 = graph.getVertex(vertex1TextField.getText().toUpperCase().charAt(0));
-                Vertex vertex2 = graph.getVertex(vertex2TextField.getText().toUpperCase().charAt(0));
+                Vertex vertex1 = graph.getVertex(vertex1TextField.getText().toUpperCase());
+                Vertex vertex2 = graph.getVertex(vertex2TextField.getText().toUpperCase());
                 if (vertexList.contains(vertex1) && vertexList.contains(vertex2)) {
                     graph.addEdge(vertex1, vertex2);
                     Edge edge = graph.addEdge(vertex1, vertex2);

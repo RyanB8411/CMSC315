@@ -12,23 +12,23 @@
 
  //Immutable class for Vertex
  public final class Vertex {
-     private Character name;
+     private String name;
      private Double x;
      private Double y;
  
      //Constructor for vertex
-     public Vertex(Character name, Double x, Double y) {
+     public Vertex(String name, Double x, Double y) {
          this.name = name;
          this.x = x;
          this.y = y;
      }
      //toString method to print the Vertex
      public String toString(){
-        return String.format("Vertex: %c at (%1.0f, %1.0f)", name, x, y);
+        return String.format("Vertex: %s at (%1.0f, %1.0f)", name, x, y);
     
      }
      //Getter for character name
-     public Character getVertexName() {
+     public String getVertexName() {
          return name;
      }
      //getter for x coordinate
